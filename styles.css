@@ -1,54 +1,66 @@
 body {
-    font-family: 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f5f5f5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #141e30, #243b55);
+    color: #ffffff;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    overflow: hidden;
+    height: 100vh;
+    margin-top: 0;
+    position: relative;
 }
 
 .container {
     width: 80%;
+    max-width: 600px;
     margin: 0 auto;
+    margin-top: 5%;
     padding: 20px;
+    background-color: #1c2331;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
     text-align: center;
+    position: relative;
+    z-index: 1;
 }
 
 .title {
     font-size: 2.5em;
-    color: #333;
+    color: #ffffff;
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 20px;
 }
 
-.dropzones {
+.dropzone {
     position: relative;
-    border: 2px dashed #ccc;
-    padding: 20px;
+    border: 2px dashed #007bff;
+    padding: 40px;
     cursor: pointer;
     transition: border-color 0.3s ease;
     margin-bottom: 20px;
-    background-color: #fff;
-    border-radius: 5px;
+    background-color: #1c2331;
+    border-radius: 10px;
 }
 
-.dropzones:focus {
-    border-color: #3da90edf;
+.dropzone:focus {
+    border-color: #00b4d8;
 }
 
-.dropzones .info {
+.dropzone .info {
     font-size: 3rem;
-    color: #ccc;
+    color: #007bff;
     transition: color 0.3s ease;
 }
 
-.dropzones:focus .info {
-    color: #3da90edf;
+.dropzone:focus .info {
+    color: #00b4d8;
 }
 
-.dropzones p {
-    margin-top: 60px;
-    color: #ccc;
+.dropzone p {
+    margin-top: 20px;
+    color: #cccccc;
 }
 
 .loading-modal {
@@ -65,7 +77,7 @@ body {
 }
 
 .loading-modal.show i {
-    color: #3da90edf;
+    color: #00b4d8;
     animation: rotate 2s infinite linear;
 }
 
@@ -80,11 +92,11 @@ body {
 
 #result {
     margin-top: 30px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12) 0 1px 2px rgba(0,0,0,0.24);
+    padding: 20px;
+    border: 1px solid #007bff;
+    background-color: #1c2331;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
@@ -94,7 +106,7 @@ body {
     font-size: 1em;
     border: none;
     border-radius: 5px;
-    background-color: #3da90edf;
+    background-color: #007bff;
     color: white;
     cursor: pointer;
     position: relative;
@@ -125,7 +137,7 @@ body {
     transform: translate(-50%, -50%) scale(2);
 }
 
-.dropzones .overlay {
+.dropzone .overlay {
     display: none;
     position: absolute;
     top: 0;
@@ -137,9 +149,24 @@ body {
     font-size: 1.5em;
     justify-content: center;
     align-items: center;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
-.dropzones.dragging .overlay {
+.dropzone.dragging .overlay {
     display: flex;
+}
+
+/* Glow effect around the mouse */
+.glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 200px;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(0, 123, 255, 0.4) 0%, rgba(0, 123, 255, 0) 60%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+    transition: transform 0.1s ease;
 }

@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
     var loadingModal = document.querySelector('#loadingModal');
     var resultDiv = document.querySelector('#result');
-    var dropzone = document.querySelector('.dropzones');
+    var dropzone = document.querySelector('.dropzone');
     var fileInput = document.querySelector('#fileInput');
     var dragCounter = 0;
+    var glow = document.querySelector('.glow');
 
     dropzone.addEventListener('dragover', function(e) {
         e.preventDefault();
@@ -11,25 +12,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     dropzone.addEventListener('dragenter', function(e) {
         e.preventDefault();
-        if (e.target === this) {
-            dragCounter++;
-            this.classList.add('dragging');
-        }
-    })
+        dragCounter++;
+        dropzone.classList.add('dragging');
+    });
     
-    dropzone.addEventListener('dragleave', function() {
-        if (e.target === this) {
-            dragCounter--;
-            if (dragCounter === 0) {
-                this.classList.remove('dragging');
-            }
+    dropzone.addEventListener('dragleave', function(e) {
+        e.preventDefault();
+        dragCounter--;
+        if (dragCounter === 0) {
+            dropzone.classList.remove('dragging');
         }
     });
     
     dropzone.addEventListener('drop', function(e) {
         e.preventDefault();
         dragCounter = 0;
-        this.classList.remove('dragging');
+        dropzone.classList.remove('dragging');
         fileInput.files = e.dataTransfer.files;
         fileInput.dispatchEvent(new Event('change'));
     });
@@ -75,6 +73,10 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .finally(() => {
             loadingModal.classList.remove('show');
-        })
-    })
+        });
+    });
+
+    document.body.addEventListener('mousemove', function(e) {
+        glow.style.transform = `translate(${e.clientX - 100}px, ${e.clientY - 100}px)`;
+    });
 });
